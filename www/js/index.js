@@ -74,14 +74,28 @@ function displayToDoList() {
 }
 
 function removeItemFromToDoList(index) {
-    //remove 1 item from list
-    todoListArray.splice(index, 1);
 
-    //save new array to the local storage
-    window.localStorage.setItem("todoList", JSON.stringify(todoListArray));
+    navigator.notification.confirm(
+        'Are you sure you want to remove this item?',
+        function (buttonIndex) {
+            onRemoveConfirm(index, buttonIndex);
+        },
+        'Remove Item',
+        ['Yes', 'No']
+    );
+}
 
-    //re-render todoList items
-    displayToDoList();
+function onRemoveConfirm(itemIndex, buttonIndex) {
+    if (buttonIndex === 1) {
+        //remove 1 item from list
+        todoListArray.splice(itemIndex, 1);
+
+        //save new array to the local storage
+        window.localStorage.setItem("todoList", JSON.stringify(todoListArray));
+
+        //re-render todoList items
+        displayToDoList();
+    }
 }
 
 function markAsDone(index) {
