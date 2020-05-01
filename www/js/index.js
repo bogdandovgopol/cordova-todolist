@@ -1,3 +1,4 @@
+//variables
 let todoListStorage = window.localStorage.getItem("todoList") ?? window.localStorage.setItem("todoList", JSON.stringify([{
     title: "test",
     done: false
@@ -15,10 +16,8 @@ let app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function () {
-        // this.fetchToDoListData();
-        fetchToDoListData();
+        displayToDoList();
         listenToAddButtonClick();
-
     },
 
 };
@@ -27,21 +26,29 @@ app.initialize();
 
 function listenToAddButtonClick() {
     $("#addTodo").click(function () {
+        //get input value
         var todoText = $("#todoTxt").val();
+        //push value to the array
         todoListArray.push({title: todoText, done: false});
+        //save array to the local storage
         window.localStorage.setItem("todoList", JSON.stringify(todoListArray));
 
-        fetchToDoListData();
+        //re-render todoList items
+        displayToDoList();
     });
 }
 
-function fetchToDoListData() {
+function displayToDoList() {
+    //get html todoList
     let list = $('#todoList');
 
+    //make sure its empty by emptying it
     list.empty();
 
+    //fetch through todoList array
     todoListArray.forEach(function (item, i) {
 
+        //UI elements
         let done = "not-done";
         let doneBtn = '<button class="btn btn-success ml-1 mt-sm-1" onclick="markAsDone(' + i + ')">Done</button>';
         let removeBtn = '<button class="btn btn-danger ml-1 mt-sm-1" onclick="removeItemFromToDoList(' + i + ')">Remove</button>';
@@ -55,23 +62,33 @@ function fetchToDoListData() {
         //action button group
         let actionBtns = '<div class="text-center">' + doneBtn + removeBtn + '</div>';
 
-        //create list item and append
+        //create list item
         let li = '<li class="list-group-item d-flex justify-content-between align-items-center item">' +
             '<a class="item-text ' + done + '">' + item.title + '</a>' +
             actionBtns +
             '</li>';
+
+        //append to the list
         list.append(li);
     })
 }
 
 function removeItemFromToDoList(index) {
+    //remove 1 item from list
     todoListArray.splice(index, 1);
+
+    //save new array to the local storage
     window.localStorage.setItem("todoList", JSON.stringify(todoListArray));
-    fetchToDoListData();
+
+    //re-render todoList items
+    displayToDoList();
 }
 
 function markAsDone(index) {
+    //edit item and save to the local storage
     todoListArray[index].done = true;
     window.localStorage.setItem("todoList", JSON.stringify(todoListArray));
-    fetchToDoListData();
+
+    //re-render todoList items
+    displayToDoList();
 }
