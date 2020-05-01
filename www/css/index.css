@@ -8,3 +8,7 @@ body {
     font-weight: bold;
 }
 
+li .btn {
+    min-width: 40px;
+    min-height: 40px;
+}

@@ -62,8 +62,8 @@ function displayToDoList() {
 
         //UI elements
         let done = "not-done";
-        let doneBtn = '<button class="btn btn-success ml-1 mt-sm-1" onclick="markAsDone(' + i + ')">Done</button>';
-        let removeBtn = '<button class="btn btn-danger ml-1 mt-sm-1" onclick="removeItemFromToDoList(' + i + ')">Remove</button>';
+        let doneBtn = '<button class="btn btn-success ml-1 mt-sm-1" onclick="markAsDone(' + i + ')"><i class="fas fa-check"></i></button>';
+        let removeBtn = '<button class="btn btn-danger ml-1 mt-sm-1" onclick="removeItemFromToDoList(' + i + ')"><i class="fas fa-times"></i></button>';
 
         //check if item is already done
         if (item.done === true) {
@@ -86,7 +86,6 @@ function displayToDoList() {
 }
 
 function removeItemFromToDoList(index) {
-
     navigator.notification.confirm(
         'Are you sure you want to remove this item?',
         function (buttonIndex) {
