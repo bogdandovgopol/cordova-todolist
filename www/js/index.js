@@ -43,8 +43,8 @@ function fetchToDoListData() {
     todoListArray.forEach(function (item, i) {
 
         var done = "not-done";
-        var doneBtn = '<button class="btn btn-success" onclick="markAsDone(' + i + ')">Done</button>';
-        var removeBtn = '<button class="btn btn-danger" onclick="removeItemFromToDoList(' + i + ')">Remove</button>';
+        var doneBtn = '<button class="btn btn-success ml-1 mt-sm-1" onclick="markAsDone(' + i + ')">Done</button>';
+        var removeBtn = '<button class="btn btn-danger ml-1 mt-sm-1" onclick="removeItemFromToDoList(' + i + ')">Remove</button>';
 
         //check if item is already done
         if (item.done === true) {
@@ -52,11 +52,13 @@ function fetchToDoListData() {
             doneBtn = "";
         }
 
+        //action button group
+        var actionBtns = '<div class="text-center">' + doneBtn + removeBtn + '</div>';
+
         //create list item and append
-        var li = '<li class="item">' +
+        var li = '<li class="list-group-item d-flex justify-content-between align-items-center item">' +
             '<a class="item-text ' + done + '">' + item.title + '</a>' +
-            doneBtn +
-            removeBtn +
+            actionBtns +
             '</li>';
         list.append(li);
     })
