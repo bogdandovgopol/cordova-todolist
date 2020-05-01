@@ -1,10 +1,10 @@
-var todoListStorage = window.localStorage.getItem("todoList") ?? window.localStorage.setItem("todoList", JSON.stringify([{
+let todoListStorage = window.localStorage.getItem("todoList") ?? window.localStorage.setItem("todoList", JSON.stringify([{
     title: "test",
     done: false
 }]));
-var todoListArray = JSON.parse(todoListStorage);
+let todoListArray = JSON.parse(todoListStorage);
 
-var app = {
+let app = {
     // Application Constructor
     initialize: function () {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
@@ -36,15 +36,15 @@ function listenToAddButtonClick() {
 }
 
 function fetchToDoListData() {
-    var list = $('#todoList');
+    let list = $('#todoList');
 
     list.empty();
 
     todoListArray.forEach(function (item, i) {
 
-        var done = "not-done";
-        var doneBtn = '<button class="btn btn-success ml-1 mt-sm-1" onclick="markAsDone(' + i + ')">Done</button>';
-        var removeBtn = '<button class="btn btn-danger ml-1 mt-sm-1" onclick="removeItemFromToDoList(' + i + ')">Remove</button>';
+        let done = "not-done";
+        let doneBtn = '<button class="btn btn-success ml-1 mt-sm-1" onclick="markAsDone(' + i + ')">Done</button>';
+        let removeBtn = '<button class="btn btn-danger ml-1 mt-sm-1" onclick="removeItemFromToDoList(' + i + ')">Remove</button>';
 
         //check if item is already done
         if (item.done === true) {
@@ -53,10 +53,10 @@ function fetchToDoListData() {
         }
 
         //action button group
-        var actionBtns = '<div class="text-center">' + doneBtn + removeBtn + '</div>';
+        let actionBtns = '<div class="text-center">' + doneBtn + removeBtn + '</div>';
 
         //create list item and append
-        var li = '<li class="list-group-item d-flex justify-content-between align-items-center item">' +
+        let li = '<li class="list-group-item d-flex justify-content-between align-items-center item">' +
             '<a class="item-text ' + done + '">' + item.title + '</a>' +
             actionBtns +
             '</li>';
