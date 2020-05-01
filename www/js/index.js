@@ -45,6 +45,18 @@ function displayToDoList() {
     //make sure its empty by emptying it
     list.empty();
 
+    //check if todoList is not empty
+    if (todoListArray.length < 1) {
+        //create list item
+        let li = '<li class="list-group-item text-center">' +
+            '<span class="item-text">List is empty</span>' +
+            '</li>';
+
+        //append to the list
+        list.append(li);
+        return;
+    }
+
     //fetch through todoList array
     todoListArray.forEach(function (item, i) {
 
@@ -64,7 +76,7 @@ function displayToDoList() {
 
         //create list item
         let li = '<li class="list-group-item d-flex justify-content-between align-items-center item">' +
-            '<a class="item-text ' + done + '">' + item.title + '</a>' +
+            '<span class="item-text ' + done + '">' + item.title + '</span>' +
             actionBtns +
             '</li>';
 
