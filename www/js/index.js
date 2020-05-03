@@ -42,12 +42,12 @@ function displayToDoList() {
     //get html todoList
     let list = $('#todoList');
 
-    //make sure its empty by emptying it
+    //make sure list is empty by emptying it
     list.empty();
 
-    //check if todoList is not empty
+    //check if todoList array is empty
     if (todoListArray.length < 1) {
-        //create list item
+        //create placeholder list item
         let li = '<li class="list-group-item text-center">' +
             '<span class="item-text">List is empty</span>' +
             '</li>';
